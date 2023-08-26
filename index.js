@@ -36,6 +36,28 @@ async function run() {
                     res.status(500).send("Something went wrong!");
                 });
         });
+
+
+        app.get("/classify" , async(req,res)=>
+        {
+            const url = req.params.url
+
+            console.log(url);
+
+            return await model
+                .classify({
+                    imageUrl: "https://i.ibb.co/6rD2Wkc/t-Yqp6v-EOo8-Yl-VWr-YQvt9ny-Ohs-A2.jpg",
+                })
+                .then((predictions) => {
+                    console.log(predictions);
+                    return res.send(predictions);
+                })
+                .catch((e) => {
+                    console.error(e);
+                    res.status(500).send("Something went wrong!");
+                });
+
+        })
     }
     finally {
         /* await client.close(); */
